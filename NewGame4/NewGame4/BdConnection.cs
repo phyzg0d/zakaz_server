@@ -1,20 +1,24 @@
 ﻿using System;
+using System.IO;
 using MySql.Data.MySqlClient;
+using NewGame4.Utilities;
 
 namespace NewGame4
 {
     public class BdConnection
     {
         public MySqlConnection Connection;
-        private string _pathDb = @"server=139.162.166.31;userid=biromiro_test;password=b{xVtmW_N*Rf;database=biromiro_zakaz";
-
         public void Connect()
         {
-            Connection = new MySqlConnection(_pathDb);
+            var data = JsonLoader.Load(@"Resources\ServerConfig.json");
+            var bdConfig = data.GetNode("BD");
+            var pathDb = $"server={bdConfig.GetString("host")};userid={bdConfig.GetString("username")};password={bdConfig.GetString("password")};database={bdConfig.GetString("database")}"; 
+            
+            Connection = new MySqlConnection(pathDb);
             Connection.Open();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nConnection successful\n");
+            Console.WriteLine("Connection successful\n");
         }
 
         public void CloseConnect()

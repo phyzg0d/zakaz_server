@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yV+uMlMxa5V5ZDnXc7OeYzp4diWQSTJPGvd0yJ77ftb1fMhOH3UjffkH0HJq6j07Q+eMT2BCjx4FQ5Lb5p/YCQ==",
+  "dgSpecHash": "NAtKAQutPE3s7+Fdu+bpYeXRZIxcg1CyydwjMvaLs6s5O3Qa0oIvqP5EdWOl+Kn0kx1DiGB4b4S7RWnNrIo/Bw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mephy\\RiderProjects\\NewGame4\\NewGame4\\NewGame4.csproj",
+  "projectFilePath": "C:\\Users\\mephy\\Desktop\\git\\zakaz_server\\NewGame4\\NewGame4\\NewGame4.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mephy\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\mephy\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
+    "C:\\Users\\mephy\\.nuget\\packages\\json\\1.0.1\\json.1.0.1.nupkg.sha512",
     "C:\\Users\\mephy\\.nuget\\packages\\json.net\\1.0.23\\json.net.1.0.23.nupkg.sha512",
     "C:\\Users\\mephy\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\mephy\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
@@ -118,6 +119,16 @@
     "C:\\Users\\mephy\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'JSON 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "JSON",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

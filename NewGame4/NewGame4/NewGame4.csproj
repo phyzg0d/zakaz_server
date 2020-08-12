@@ -2,9 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="JSON" Version="1.0.1" />
       <PackageReference Include="Json.Net" Version="1.0.23" />
       <PackageReference Include="MySql.Data" Version="8.0.21" />
       <PackageReference Include="MySql.Data.Entity" Version="6.10.9" />
@@ -36,6 +38,10 @@
       <Content Update="Web.config">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="Resources\ServerConfig.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>
     </ItemGroup>

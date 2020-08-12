@@ -28,6 +28,15 @@
           "lib/netstandard1.0/Google.Protobuf.dll": {}
         }
       },
+      "JSON/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Json.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Json.dll": {}
+        }
+      },
       "Json.Net/1.0.23": {
         "type": "package",
         "compile": {
@@ -1866,6 +1875,28 @@
         "lib/net45/Google.Protobuf.xml",
         "lib/netstandard1.0/Google.Protobuf.dll",
         "lib/netstandard1.0/Google.Protobuf.xml"
+      ]
+    },
+    "JSON/1.0.1": {
+      "sha512": "n387Xh1oDWolCIVb2oMV1bWkEKBBk5iLkMuaiAQuLUaAZwowyym2s/6b/hFnmS5J3bzINmZ7I2WEbBAZMQd2dg==",
+      "type": "package",
+      "path": "json/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "json.1.0.1.nupkg.sha512",
+        "json.nuspec",
+        "lib/net35/Json.Net35.dll",
+        "lib/net35/Json.Net35.pdb",
+        "lib/net40/Json.dll",
+        "lib/net40/Json.pdb",
+        "lib/sl3/Json.Silverlight.dll",
+        "lib/sl3/Json.Silverlight.pdb",
+        "lib/sl4/Json.Silverlight4.dll",
+        "lib/sl4/Json.Silverlight4.pdb",
+        "lib/wp/Json.WindowsPhone.dll",
+        "lib/wp/Json.WindowsPhone.pdb"
       ]
     },
     "Json.Net/1.0.23": {
@@ -6436,6 +6467,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "JSON >= 1.0.1",
       "Json.Net >= 1.0.23",
       "MySql.Data >= 8.0.21",
       "MySql.Data.Entity >= 6.10.9",
@@ -6452,11 +6484,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mephy\\RiderProjects\\NewGame4\\NewGame4\\NewGame4.csproj",
+      "projectUniqueName": "C:\\Users\\mephy\\Desktop\\git\\zakaz_server\\NewGame4\\NewGame4\\NewGame4.csproj",
       "projectName": "NewGame4",
-      "projectPath": "C:\\Users\\mephy\\RiderProjects\\NewGame4\\NewGame4\\NewGame4.csproj",
+      "projectPath": "C:\\Users\\mephy\\Desktop\\git\\zakaz_server\\NewGame4\\NewGame4\\NewGame4.csproj",
       "packagesPath": "C:\\Users\\mephy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mephy\\RiderProjects\\NewGame4\\NewGame4\\obj\\",
+      "outputPath": "C:\\Users\\mephy\\Desktop\\git\\zakaz_server\\NewGame4\\NewGame4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mephy\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6483,6 +6515,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "JSON": {
+            "target": "Package",
+            "version": "[1.0.1, )"
+          },
           "Json.Net": {
             "target": "Package",
             "version": "[1.0.23, )"
@@ -6539,6 +6575,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'JSON 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "JSON",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
