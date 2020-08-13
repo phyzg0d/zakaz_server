@@ -10,14 +10,14 @@ namespace NewGame4.Commands.Base
     public abstract class ExecuteCommand : IExecuteCommand
     {
         public string NameCommand { get; set; }
-        protected Dictionary<string, string> UserParams = new Dictionary<string, string>();
+        protected Dictionary<string, object> UserParams = new Dictionary<string, object>();
         protected HttpResponse Response { get; }
-
-
+        
         protected ExecuteCommand(HttpResponse response)
         {
             Response = response;
-            UserParams.Add("Error", string.Empty);
+            UserParams.Add("error", false);
+            UserParams.Add("error_text", string.Empty);
             Dictionary<string, StringValue> headers = new Dictionary<string, StringValue>();
             Response.OnStarting(() =>
             {

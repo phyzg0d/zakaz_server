@@ -38,20 +38,17 @@ namespace NewGame4.Commands.Registration
             emailCheck.Read();
             if (emailCheck.HasRows)
             {
-                Response.WriteAsync("Email exist");
+                UserParams["error"] = true;
+                UserParams["error_text"] = "Email exist";
+                Send();
                 emailCheck.Close();
                 return;
             }
             emailCheck.Close();
 
-            command.CommandText = $"INSERT INTO users(Name, SecondName, Password, Email) VALUES({_name}, {_secondName}, {_password}, {_email})";
-            command.Parameters.AddWithValue("@Name", $"{_name}");
-            command.Parameters.AddWithValue("@SecondName", $"{_secondName}");
-            command.Parameters.AddWithValue("@Password", $"{_password}");
-            command.Parameters.AddWithValue("@Email", $"{_email}");
+            command.CommandText = $"INSERT INTO users (Name, SecondName, Password, Email) VALUES( '{_name}', '{_secondName}', '{_password}', '{_email}')";
             command.ExecuteNonQuery();
 
-            Response.WriteAsync("All correct");
             Send();
         }
     }
