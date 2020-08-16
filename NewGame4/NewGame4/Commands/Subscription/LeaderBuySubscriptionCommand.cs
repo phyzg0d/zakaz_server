@@ -18,7 +18,7 @@ namespace NewGame4.Commands.Subscription
         private string _currentTariff { get; }
         private string _tariffRemainingTime { get; }
         
-        public LeaderBuySubscriptionCommand(IFormCollection data, HttpResponse response) : base(response)
+        public LeaderBuySubscriptionCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _password = data["password"];

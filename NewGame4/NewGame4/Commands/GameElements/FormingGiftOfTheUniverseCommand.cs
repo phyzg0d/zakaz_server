@@ -16,7 +16,7 @@ namespace NewGame4.Commands.GameElements
         private string _jokers { get; }
         private string _resources { get; }
 
-        public FormingGiftOfTheUniverseCommand(IFormCollection data, HttpResponse response) : base(response)
+        public FormingGiftOfTheUniverseCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _buttons = data["buttons"];

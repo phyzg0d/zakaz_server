@@ -6,10 +6,11 @@ namespace NewGame4.Commands.SignIn_SignOut
 {
     public class UserSignInCommand : ExecuteCommand
     {
+        private string _id { get; }
         private string _email { get; }
         private string _password { get; }
 
-        public UserSignInCommand(IFormCollection data, HttpResponse response) : base(response)
+        public UserSignInCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _email = data["email"];
@@ -17,6 +18,11 @@ namespace NewGame4.Commands.SignIn_SignOut
             
             UserParams.Add("Email", string.Empty);
             UserParams.Add("Password", string.Empty);
+        }
+
+        public void Login()
+        {
+            
         }
         
         public override void Execute(ServerContext context)

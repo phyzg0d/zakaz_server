@@ -20,8 +20,6 @@ namespace NewGame4
             string exampleString = JsonConvert.SerializeObject(test);
             Console.WriteLine(exampleString);
             
-            
-            
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("\nServer started\n");
             CreateHostBuilder(args).Build().Run();

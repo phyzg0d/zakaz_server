@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using NewGame4.Commands;
 using NewGame4.Commands.Base;
 using NewGame4.Commands.GameElements;
 using NewGame4.Commands.GameProcess;
@@ -8,32 +9,32 @@ using NewGame4.Commands.GamingFields;
 using NewGame4.Commands.Registration;
 using NewGame4.Commands.SignIn_SignOut;
 using NewGame4.Commands.Subscription;
-using Ubiety.Dns.Core;
 
 namespace NewGame4.Utilities
 {
     public class Factory
     {
-        public Dictionary<string, Func<IFormCollection, HttpResponse, IExecuteCommand>> CommandFactory;
+        public Dictionary<string, Func<IFormCollection, HttpResponse, HttpRequest, IExecuteCommand>> CommandFactory;
         private ServerContext _context;
 
         public Factory(ServerContext context)
         {
             _context = context;
-            CommandFactory = new Dictionary<string, Func<IFormCollection, HttpResponse, IExecuteCommand>>
+            CommandFactory = new Dictionary<string, Func<IFormCollection, HttpResponse, HttpRequest, IExecuteCommand>>
             {
-                {nameof(UserSignInCommand), (form, response) => new UserSignInCommand(form, response)},
-                {nameof(SignOutCommand), (form, response) => new SignOutCommand(form, response)},
-                {nameof(LeaderBuySubscriptionCommand), (form, response) => new LeaderBuySubscriptionCommand(form, response)},
-                {nameof(RegistrationCommand), (form, response) => new RegistrationCommand(form, response)},
-                {nameof(GamingFieldSectionNowPlayingCommand), (form, response) => new GamingFieldSectionNowPlayingCommand(form, response)},
-                {nameof(LeaderDistributeTreasuryCommand), (form, response) => new LeaderDistributeTreasuryCommand(form, response)},
-                {nameof(CreateNewGameCommand), (form, response) => new CreateNewGameCommand(form, response)},
-                {nameof(BagFillingCommand), (form, response) => new BagFillingCommand(form, response)},
-                {nameof(FormingGiftOfTheUniverseCommand), (form, response) => new FormingGiftOfTheUniverseCommand(form, response)},
-                {nameof(FormingGamingSectorCommand), (form, response) => new FormingGamingSectorCommand(form, response)},
-                {nameof(FormingCoffersCommand), (form, response) => new FormingCoffersCommand(form, response)},
-                {nameof(DecomposedElementsCommand), (form, response) => new DecomposedElementsCommand(form, response)},
+                {nameof(UserSignInCommand), (form, response, request) => new UserSignInCommand(form, response, request)},
+                {nameof(SignOutCommand), (form, response, request) => new SignOutCommand(form, response, request)},
+                {nameof(LeaderBuySubscriptionCommand), (form, response, request) => new LeaderBuySubscriptionCommand(form, response, request)},
+                {nameof(RegistrationCommand), (form, response, request) => new RegistrationCommand(form, response, request)},
+                {nameof(GamingFieldSectionNowPlayingCommand), (form, response, request) => new GamingFieldSectionNowPlayingCommand(form, response, request)},
+                {nameof(LeaderDistributeTreasuryCommand), (form, response, request) => new LeaderDistributeTreasuryCommand(form, response, request)},
+                {nameof(CreateNewGameCommand), (form, response, request) => new CreateNewGameCommand(form, response, request)},
+                {nameof(BagFillingCommand), (form, response, request) => new BagFillingCommand(form, response, request)},
+                {nameof(FormingGiftOfTheUniverseCommand), (form, response, request) => new FormingGiftOfTheUniverseCommand(form, response, request)},
+                {nameof(FormingGamingSectorCommand), (form, response, request) => new FormingGamingSectorCommand(form, response, request)},
+                {nameof(FormingCoffersCommand), (form, response, request) => new FormingCoffersCommand(form, response, request)},
+                {nameof(DecomposedElementsCommand), (form, response, request) => new DecomposedElementsCommand(form, response, request)},
+                {nameof(ConnectionUserCommand), (form, response, request) => new ConnectionUserCommand(form, response, request)}
             };
         }
     }

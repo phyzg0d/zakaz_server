@@ -18,7 +18,7 @@ namespace NewGame4.Commands.GameProcess
         private string _btnShowTableGamer { get; }
         private string _flag { get; }
         
-        public LeaderDistributeTreasuryCommand(IFormCollection data, HttpResponse response) : base(response)
+        public LeaderDistributeTreasuryCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _name = data["name"];

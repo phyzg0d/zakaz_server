@@ -10,7 +10,7 @@ namespace NewGame4.Commands.GamingFields
     {
         private string _name { get; }
         
-        public GamingFieldSectionNowPlayingCommand(IFormCollection data, HttpResponse response) : base(response)
+        public GamingFieldSectionNowPlayingCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _name = data["name"];

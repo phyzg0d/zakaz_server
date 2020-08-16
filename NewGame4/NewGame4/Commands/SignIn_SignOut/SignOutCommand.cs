@@ -11,7 +11,7 @@ namespace NewGame4.Commands.SignIn_SignOut
         
         private string _name { get; }
 
-        public SignOutCommand(IFormCollection data, HttpResponse response) : base(response)
+        public SignOutCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
             _name = data["name"];

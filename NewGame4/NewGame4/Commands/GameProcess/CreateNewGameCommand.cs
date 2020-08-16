@@ -6,7 +6,7 @@ namespace NewGame4.Commands.GameProcess
 {
     public class CreateNewGameCommand : ExecuteCommand
     {
-        public CreateNewGameCommand(IFormCollection data, HttpResponse response) : base(response)
+        public CreateNewGameCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserSignInCommand);
            

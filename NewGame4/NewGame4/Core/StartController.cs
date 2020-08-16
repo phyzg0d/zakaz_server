@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using fastJSON;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using NewGame4.Commands;
 using NewGame4.Utilities;
 using Newtonsoft.Json;
@@ -15,10 +19,12 @@ namespace NewGame4.Core
     {
         private readonly ServerContext _context;
         private ControllerCollection _controllerCollection = new ControllerCollection();
+        private HttpContext _httpContext;
 
-        public StartController(ServerContext context)
+        public StartController(ServerContext context, HttpContext httpContext)
         {
             _context = context;
+            _httpContext = httpContext;
 
             _context.BdConnection = new BdConnection();
             _context.BdConnection.Connect();
