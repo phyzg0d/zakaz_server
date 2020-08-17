@@ -34,7 +34,7 @@ namespace NewGame4.Utilities
                 {nameof(FormingGamingSectorCommand), (form, response, request) => new FormingGamingSectorCommand(form, response, request)},
                 {nameof(FormingCoffersCommand), (form, response, request) => new FormingCoffersCommand(form, response, request)},
                 {nameof(DecomposedElementsCommand), (form, response, request) => new DecomposedElementsCommand(form, response, request)},
-                {nameof(ConnectionUserCommand), (form, response, request) => new ConnectionUserCommand(form, response, request)}
+                {nameof(UserConnectionCommand), (form, response, request) => new UserConnectionCommand(form, response, request)}
             };
         }
     }

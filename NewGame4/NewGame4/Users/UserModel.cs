@@ -19,7 +19,6 @@ namespace NewGame4.Users
                 if (user.IsNew)
                 {
                     user.IsNew = false;
-                    command.CommandText = "USE users";
                     command.CommandText = $"INSERT INTO users(Name, SecondName, Email, Password) VALUES('{user.Name}', '{user.SecondName}', '{user.Email}', '{user.Password}')";
                     command.ExecuteNonQuery();
                 }
@@ -51,9 +50,10 @@ namespace NewGame4.Users
                     Password = userReader.GetString("Password"),
                     Session = userReader.GetString("Session"),
                 };
-                _users.Add(user.Id, user);
+                _users.Add(user.SecondName, user);
                 Emails.Add(user.Email);
             }
+            userReader.Close();
         }
 
         public IUserUnitModel Get(string id)
@@ -68,7 +68,7 @@ namespace NewGame4.Users
 
         public void Add(string id, IUserUnitModel user)
         {
-            _users.Add(id, user);
+            _users.Add(user.SecondName, user);
             Emails.Add(user.Email);
         }
     }

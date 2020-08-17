@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
@@ -34,17 +35,20 @@ namespace NewGame4.Commands.Registration
 
         public override void Execute(ServerContext context)
         {
-            if (context.UserModel.Emails.Contains(_email))
+            if (context.UserModel.Emails.Exists(x => x == _email))
             {
                 UserParams["error"] = true;
                 UserParams["error_text"] = "Email exist";
             }
             else
             {
+                var userParam = new Random().Next(0, 100000).ToString();
+                UserParams["session"] = userParam;
+                UserParams["userId"] = userParam;
                 var user = new UserUnitModel()
                 {
                     Name = _name,
-                    SecondName = _secondName,
+                    SecondName = userParam,
                     Email = _email,
                     Password = _password,
                     Session = _session,
