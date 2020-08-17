@@ -1,4 +1,5 @@
 ﻿using NewGame4.Commands;
+using NewGame4.Users;
 using NewGame4.Utilities;
 
 namespace NewGame4
@@ -8,5 +9,6 @@ namespace NewGame4
         public CommandModel CommandModel;
         public Factory Factory;
         public BdConnection BdConnection;
+        public UserModel UserModel;
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
+using NewGame4.Users;
 
 namespace NewGame4.Commands.Registration
 {
@@ -33,44 +34,24 @@ namespace NewGame4.Commands.Registration
 
         public override void Execute(ServerContext context)
         {
-            
-            // if (Request.Cookies.ContainsKey("Name"))
-            // {
-            //     Console.WriteLine(Request.Cookies["Name"]);
-            // }
-            // else
-            // {
-            //     Response.Cookies.Append("Name", _name);
-            // }
-            
-            var command = new MySqlCommand("")
-            {
-                Connection = context.BdConnection.Connection
-            };
-            
-            command.CommandText = $"SELECT * FROM users WHERE Email ='{_email}'";
-            var emailCheck = command.ExecuteReader();
-            emailCheck.Read();
-            if (emailCheck.HasRows)
+            if (context.UserModel.Emails.Contains(_email))
             {
                 UserParams["error"] = true;
                 UserParams["error_text"] = "Email exist";
-                // Response.Cookies.Append("Name", _name);
-                Send();
-                emailCheck.Close();
-                return;
             }
-            emailCheck.Close();
-            // var cookieOptions = new CookieOptions()
-            // {
-            //     HttpOnly = true,
-            //     SameSite = SameSiteMode.Lax,
-            //     Domain = "localhost:49752"
-            // };
-            // Response.Cookies.Append("Name", _name, cookieOptions);
-            
-            command.CommandText = $"INSERT INTO users (Name, SecondName, Password, Email, Session) VALUES( '{_name}', '{_secondName}', '{_password}', '{_email}', '{_session}')";
-            command.ExecuteNonQuery();
+            else
+            {
+                var user = new UserUnitModel()
+                {
+                    Name = _name,
+                    SecondName = _secondName,
+                    Email = _email,
+                    Password = _password,
+                    Session = _session,
+                    IsNew = true
+                };
+                context.UserModel.Add(_email, user);
+            }
             
             Send();
         }
