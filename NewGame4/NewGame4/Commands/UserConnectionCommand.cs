@@ -20,7 +20,7 @@ namespace NewGame4.Commands
             if (context.UserModel.Contains(_id))
             {
                 var user = context.UserModel.Get(_id);
-                if (user.SecondName == _id)
+                if (user.Session == _id)
                 {
                     Console.WriteLine("authorisation");
                     UserParams.Add("authorisation", true);            
