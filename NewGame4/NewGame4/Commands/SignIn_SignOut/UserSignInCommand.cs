@@ -32,8 +32,7 @@ namespace NewGame4.Commands.SignIn_SignOut
             else
             {
                 var userId = context.UserModel.emails[_email];
-                context.UserModel.Get(userId);
-                var user = context.UserModel.Get(_password);;
+                var user = context.UserModel.Get(userId);
                 
                 if (_password == user.Password)
                 {
