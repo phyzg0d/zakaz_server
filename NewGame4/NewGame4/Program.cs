@@ -10,20 +10,9 @@ namespace NewGame4
     {
         public static void Main(string[] args)
         {
-            Dictionary<string, object> test = new Dictionary<string, object>
-            {
-                { "123", 11 },    
-                { "1234", 111 },
-                { "12345", 1111 }
-            };
-            
-            string exampleString = JsonConvert.SerializeObject(test);
-            Console.WriteLine(exampleString);
-            
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("\nServer started\n");
             CreateHostBuilder(args).Build().Run();
-            
             Console.Read();
         }
         

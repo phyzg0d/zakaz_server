@@ -30,7 +30,7 @@ namespace NewGame4.Commands.Registration
 
         public override void Execute(ServerContext context)
         {
-            if (context.UserModel.emails.Exists(x => x == _email))
+            if (context.UserModel.emails.ContainsKey(_email))
             {
                 UserParams["error"] = true;
                 UserParams["error_text"] = "Email exist";

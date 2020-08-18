@@ -17,7 +17,7 @@
     },
     "NewGame4": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "http://127.0.0.1:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

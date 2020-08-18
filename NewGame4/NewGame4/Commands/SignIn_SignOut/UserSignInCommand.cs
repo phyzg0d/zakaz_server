@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
+using NewGame4.Users;
 
 namespace NewGame4.Commands.SignIn_SignOut
 {
@@ -22,35 +24,29 @@ namespace NewGame4.Commands.SignIn_SignOut
 
         public override void Execute(ServerContext context)
         {
-            var command = new MySqlCommand("")
+            if (!context.UserModel.emails.ContainsKey(_email))
             {
-                Connection = context.BdConnection.Connection
-            };
-            
-            command.CommandText = $"SELECT * FROM users WHERE Email ='{_email}'";
-            
-            var signInEmailCheck = command.ExecuteReader();
-            signInEmailCheck.Read();
-            if ("Email" != _email)
-            {
-                Response.WriteAsync("Incorrect email");
-                signInEmailCheck.Close();
-                return;
+                UserParams["error"] = true;
+                UserParams["error_text"] = "Wrong email";
             }
-            signInEmailCheck.Close();
-
-            command.CommandText = $"SELECT * FROM users WHERE Password ='{_password}'";
-            var  signInPasswordCheck = command.ExecuteReader();
-            signInPasswordCheck.Read();
-            if ("Password" != _password)
+            else
             {
-                Response.WriteAsync("Incorrect password");
-                signInPasswordCheck.Close();
-                return;
+                var userId = context.UserModel.emails[_email];
+                context.UserModel.Get(userId);
+                var user = context.UserModel.Get(_password);;
+                
+                if (_password == user.Password)
+                {
+                    var userParam = new Random().Next(0, 100000).ToString();
+                    UserParams["session"] = userParam;
+                    user.Session = userParam;
+                }
+                else
+                {
+                    UserParams["error"] = true;
+                    UserParams["error_text"] = "Wrong password";
+                }
             }
-            signInPasswordCheck.Close();
-
-            Response.WriteAsync("Sign in");
             Send();
         }
     }

@@ -6,7 +6,7 @@ namespace NewGame4.Users
     public class UserModel
     {
         private Dictionary<string, IUserUnitModel> _users = new Dictionary<string, IUserUnitModel>();
-        public List<string> emails = new List<string>();
+        public Dictionary<string, string> emails = new Dictionary<string, string>();
         public void Serialize(ServerContext context)
         {
             foreach (var user in _users.Values)
@@ -53,7 +53,7 @@ namespace NewGame4.Users
                     Session = userReader.GetString("session"),
                 };
                 _users.Add(user.UserId, user);
-                emails.Add(user.Email);
+                emails.Add(user.Email, user.UserId);
             }
             userReader.Close();
         }
@@ -71,7 +71,7 @@ namespace NewGame4.Users
         public void Add(string id, IUserUnitModel user)
         {
             _users.Add(user.UserId, user);
-            emails.Add(user.Email);
+            emails.Add(user.Email, user.UserId);
         }
     }
 }
