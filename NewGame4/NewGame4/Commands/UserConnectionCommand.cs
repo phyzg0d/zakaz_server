@@ -7,12 +7,12 @@ namespace NewGame4.Commands
     public class UserConnectionCommand : ExecuteCommand
     {
         private string _id { get; }
-        private string _email { get; }
+        private string _session { get; }
         public UserConnectionCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(UserConnectionCommand);
             _id = data["userId"];
-            _email = data["session"];
+            _session = data["session"];
         }
 
         public override void Execute(ServerContext context)
@@ -20,7 +20,7 @@ namespace NewGame4.Commands
             if (context.UserModel.Contains(_id))
             {
                 var user = context.UserModel.Get(_id);
-                if (user.Session == _id)
+                if (user.Session == _session)
                 {
                     Console.WriteLine("authorisation");
                     UserParams.Add("authorisation", true);            
@@ -30,7 +30,6 @@ namespace NewGame4.Commands
             {
                 UserParams["authorisation"] = false;
             }
-            
             Send();
         }
     }
