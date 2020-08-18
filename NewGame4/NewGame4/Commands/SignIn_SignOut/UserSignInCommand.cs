@@ -37,6 +37,7 @@ namespace NewGame4.Commands.SignIn_SignOut
                 if (_password == user.Password)
                 {
                     var userParam = new Random().Next(0, 100000).ToString();
+                    UserParams["userId"] = user.UserId;
                     UserParams["session"] = userParam;
                     user.Session = userParam;
                 }
