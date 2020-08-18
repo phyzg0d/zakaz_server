@@ -10,5 +10,6 @@
         public string Password { get; set;}
         public string Session { get; set;}
         public bool IsNew { get; set; }
+        public bool IsAuthorisation { get; set; }
     }
 }

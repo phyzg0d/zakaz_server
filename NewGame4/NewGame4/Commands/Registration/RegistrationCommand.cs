@@ -48,6 +48,7 @@ namespace NewGame4.Commands.Registration
                     Password = _password,
                     Session = userParam,
                     UserId = userParam,
+                    IsAuthorisation = true,
                     IsNew = true
                 };
                 context.UserModel.Add(_email, user);

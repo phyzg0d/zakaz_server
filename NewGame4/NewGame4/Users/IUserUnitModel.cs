@@ -8,7 +8,8 @@
         string SecondName { get; }
         string Email { get; }
         string Password { get; }
-        string Session { get; }
+        string Session { get; set; }
         bool IsNew { get; set; }
+        bool IsAuthorisation { get; set; }
     }
 }

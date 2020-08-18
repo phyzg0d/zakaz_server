@@ -19,13 +19,13 @@ namespace NewGame4.Users
                 if (user.IsNew)
                 {
                     user.IsNew = false;
-                    command.CommandText = $"INSERT INTO users(name, user_id, second_name, email, password, session) VALUES('{user.Name}', '{user.UserId}', '{user.SecondName}', '{user.Email}', '{user.Password}', '{user.Session}')";
+                    command.CommandText = $"INSERT INTO users(name, user_id, is_authorisation, second_name, email, password, session) VALUES('{user.Name}', '{user.UserId}', '{user.IsAuthorisation}', '{user.SecondName}', '{user.Email}', '{user.Password}', '{user.Session}')";
                     command.ExecuteNonQuery();
                 }
                 else
                 {
-                    // command.CommandText = $"UPDATE users SET (Name, SecondName, Password, Email, Session) VALUES( '{user.Name}', '{user.SecondName}', '{user.Password}', '{user.Email}', '{user.Session}')";
-                    // command.ExecuteNonQuery();
+                    command.CommandText = $"UPDATE users SET (name, user_id, is_authorisation, second_name, email, password, session) VALUES('{user.Name}', '{user.UserId}', '{user.IsAuthorisation}', '{user.SecondName}', '{user.Email}', '{user.Password}', '{user.Session}')";
+                    command.ExecuteNonQuery();
                 }
             }
         }
