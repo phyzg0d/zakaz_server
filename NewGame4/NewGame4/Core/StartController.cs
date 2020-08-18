@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using NewGame4.Commands;
+using NewGame4.Sessions;
 using NewGame4.Users;
 using NewGame4.Utilities;
 using Newtonsoft.Json;
@@ -40,12 +41,14 @@ namespace NewGame4.Core
             _context.CommandModel = new CommandModel();
             _context.Factory = new Factory(_context);
             _context.UserModel = new UserModel();
+            _context.SessionModel = new SessionModel();
         }
 
         private void CreateControllers()
         {
             _controllerCollection.Add(new CommandController(_context, _context.CommandModel));
             _controllerCollection.Add(new UserController(_context, _context.UserModel));
+            _controllerCollection.Add(new SessionController(_context, _context.SessionModel));
         }
     }
 }

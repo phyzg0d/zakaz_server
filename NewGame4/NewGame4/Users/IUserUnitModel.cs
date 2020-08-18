@@ -3,6 +3,7 @@
     public interface IUserUnitModel
     {
         string Id { get;  }
+        string UserId { get;  }
         string Name { get; }
         string SecondName { get; }
         string Email { get; }

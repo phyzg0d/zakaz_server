@@ -22,14 +22,6 @@ namespace NewGame4.Commands.SignIn_SignOut
         public override void Execute(ServerContext context)
         {
             Response.StatusCode = 200;
-            if (_authorisation)
-            {
-               
-            }
-            else
-            {
-                UserParams["Error"] = "Authorisation Error";
-            }
             Send();
         }
 

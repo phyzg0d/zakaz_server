@@ -14,7 +14,6 @@ namespace NewGame4.Commands.Registration
         private string _secondName { get; }
         private string _password { get; }
         private string _email { get; }
-        private string _session { get; }
 
         public RegistrationCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
@@ -24,18 +23,14 @@ namespace NewGame4.Commands.Registration
             _secondName = data["secondName"];
             _password = data["password"];
             _email = data["email"];
-            _session = data["session"];
 
-            UserParams.Add("Id", string.Empty);
-            // UserParams.Add("Name", string.Empty);
-            // UserParams.Add("SecondName", string.Empty);
-            // UserParams.Add("Password", string.Empty);
-            // UserParams.Add("Email", string.Empty);
+            UserParams.Add("userId", string.Empty);
+            UserParams.Add("session", string.Empty);
         }
 
         public override void Execute(ServerContext context)
         {
-            if (context.UserModel.Emails.Exists(x => x == _email))
+            if (context.UserModel.emails.Exists(x => x == _email))
             {
                 UserParams["error"] = true;
                 UserParams["error_text"] = "Email exist";
@@ -43,15 +38,16 @@ namespace NewGame4.Commands.Registration
             else
             {
                 var userParam = new Random().Next(0, 100000).ToString();
-                UserParams["session"] = userParam;
                 UserParams["userId"] = userParam;
+                UserParams["session"] = userParam;
                 var user = new UserUnitModel()
                 {
                     Name = _name,
-                    SecondName = userParam,
+                    SecondName = _secondName,
                     Email = _email,
                     Password = _password,
-                    Session = _session,
+                    Session = userParam,
+                    UserId = userParam,
                     IsNew = true
                 };
                 context.UserModel.Add(_email, user);

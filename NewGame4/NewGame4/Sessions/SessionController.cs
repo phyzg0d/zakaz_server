@@ -2,16 +2,16 @@
 using System.Timers;
 using NewGame4.Utilities;
 
-namespace NewGame4.Users
+namespace NewGame4.Sessions
 {
-    public class UserController : IController
+    public class SessionController : IController
     {
         private readonly ServerContext _context;
-        private readonly UserModel _model;
+        private readonly SessionModel _model;
         private Timer aTimer;
         
 
-        public UserController(ServerContext context, UserModel model)
+        public SessionController(ServerContext context, SessionModel model)
         {
             _context = context;
             _model = model;
@@ -20,13 +20,13 @@ namespace NewGame4.Users
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             _model.Serialize(_context);
-            Console.WriteLine("user_OnEndTimer");
+            Console.WriteLine("session_OnEndTimer");
         }
 
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(5000);
+            aTimer = new Timer(4000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;

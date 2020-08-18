@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
-using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
 
 namespace NewGame4.Commands
@@ -18,12 +17,20 @@ namespace NewGame4.Commands
 
         public override void Execute(ServerContext context)
         {
-            var user = context.UserModel.Get(_id);
-            if (user.SecondName == _id)
+            if (context.UserModel.Contains(_id))
             {
-                Console.WriteLine("authorisation");
-                UserParams.Add("authorisation", true);            
+                var user = context.UserModel.Get(_id);
+                if (user.SecondName == _id)
+                {
+                    Console.WriteLine("authorisation");
+                    UserParams.Add("authorisation", true);            
+                }
             }
+            else
+            {
+                UserParams["authorisation"] = false;
+            }
+            
             Send();
         }
     }

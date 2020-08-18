@@ -20,11 +20,6 @@ namespace NewGame4.Commands.SignIn_SignOut
             UserParams.Add("Password", string.Empty);
         }
 
-        public void Login()
-        {
-            
-        }
-        
         public override void Execute(ServerContext context)
         {
             var command = new MySqlCommand("")

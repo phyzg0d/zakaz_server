@@ -6,7 +6,7 @@ namespace NewGame4.Users
     public class UserModel
     {
         private Dictionary<string, IUserUnitModel> _users = new Dictionary<string, IUserUnitModel>();
-        public List<string> Emails = new List<string>();
+        public List<string> emails = new List<string>();
         public void Serialize(ServerContext context)
         {
             foreach (var user in _users.Values)
@@ -19,7 +19,7 @@ namespace NewGame4.Users
                 if (user.IsNew)
                 {
                     user.IsNew = false;
-                    command.CommandText = $"INSERT INTO users(Name, SecondName, Email, Password) VALUES('{user.Name}', '{user.SecondName}', '{user.Email}', '{user.Password}')";
+                    command.CommandText = $"INSERT INTO users(name, user_id, second_name, email, password, session) VALUES('{user.Name}', '{user.UserId}', '{user.SecondName}', '{user.Email}', '{user.Password}', '{user.Session}')";
                     command.ExecuteNonQuery();
                 }
                 else
@@ -44,14 +44,15 @@ namespace NewGame4.Users
                 var user = new UserUnitModel()
                 {
                     Id = userReader.GetString("id"),
-                    Name = userReader.GetString("Name"),
-                    SecondName = userReader.GetString("SecondName"),
-                    Email = userReader.GetString("Email"),
-                    Password = userReader.GetString("Password"),
-                    Session = userReader.GetString("Session"),
+                    UserId = userReader.GetString("user_id"),
+                    Name = userReader.GetString("name"),
+                    SecondName = userReader.GetString("second_name"),
+                    Email = userReader.GetString("email"),
+                    Password = userReader.GetString("password"),
+                    Session = userReader.GetString("session"),
                 };
-                _users.Add(user.SecondName, user);
-                Emails.Add(user.Email);
+                _users.Add(user.UserId, user);
+                emails.Add(user.Email);
             }
             userReader.Close();
         }
@@ -68,8 +69,8 @@ namespace NewGame4.Users
 
         public void Add(string id, IUserUnitModel user)
         {
-            _users.Add(user.SecondName, user);
-            Emails.Add(user.Email);
+            _users.Add(user.UserId, user);
+            emails.Add(user.Email);
         }
     }
 }
