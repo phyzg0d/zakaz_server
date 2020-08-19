@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
 namespace NewGame4.Sessions
@@ -11,7 +13,7 @@ namespace NewGame4.Sessions
         {
             foreach (var user in _users.Values)
             {
-                var command = new MySqlCommand("")
+                var command = new SqlCommand("")
                 {
                     Connection = context.BdConnection.Connection
                 };
@@ -32,7 +34,7 @@ namespace NewGame4.Sessions
 
         public void Deserialize(ServerContext context)
         {
-            var command = new MySqlCommand("")
+            var command = new SqlCommand("")
             {
                 Connection = context.BdConnection.Connection
             };

@@ -10,6 +10,6 @@
         string Password { get; }
         string Session { get; set; }
         bool IsNew { get; set; }
-        bool IsAuthorisation { get; set; }
+        int IsAuthorisation { get; set; }
     }
 }

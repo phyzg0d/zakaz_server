@@ -22,7 +22,7 @@ namespace NewGame4.Commands.SignIn_SignOut
         {
             var userUnitModel = context.UserModel.Get(_userId);
             userUnitModel.Session = string.Empty;
-            userUnitModel.IsAuthorisation = false;
+            userUnitModel.IsAuthorisation = 0;
             UserParams.Add("authorisation", false);
             Send();
         }

@@ -1,0 +1,14 @@
+﻿{
+  "BD": {
+    "bdHost": "",
+    "bdPassword": "",
+    "bdPort": "",
+    "bdReservedPort": ""
+  },
+  "Server": {
+    "serverHost": "",
+    "serverPassword": "",
+    "serverPort": "",
+    "serverReservedPort": ""
+  }
+}
