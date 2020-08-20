@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using NewGame4.Commands.Base;
-using NewGame4.Commands.SignIn_SignOut;
+using NewGame4.Utilities;
 
 namespace NewGame4.Commands.GameProcess
 {
@@ -8,12 +9,13 @@ namespace NewGame4.Commands.GameProcess
     {
         public CreateNewGameCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
-           
+            NameCommand = nameof(CreateNewGameCommand);
             
         }      
         public override void Execute(ServerContext context)
         {
+            Console.WriteLine(UserParams.GetString("countOfPlayers"));
+            Console.WriteLine(NameCommand);
             Send();
         }
     }
