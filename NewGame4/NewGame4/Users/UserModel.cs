@@ -10,6 +10,8 @@ namespace NewGame4.Users
         private Dictionary<string, IUserUnitModel> _users = new Dictionary<string, IUserUnitModel>();
         public Dictionary<string, string> emails = new Dictionary<string, string>();
         public byte[] CurrentSplash;
+        public int X;
+        public int Y;
         public void Serialize(ServerContext context)
         {
             foreach (var user in _users.Values)
@@ -27,9 +29,9 @@ namespace NewGame4.Users
                 }
                 else
                 {
-                    command.CommandText = $"UPDATE users SET name = '{user.Name}', is_authorisation = '{user.IsAuthorisation}', second_name = '{user.SecondName}', email = '{user.Email}', password = '{user.Password}', session = '{user.Session}' WHERE user_id = '{user.UserId}'";
-                    command.ExecuteNonQuery();
-                    
+                    // command.CommandText = $"UPDATE users SET name = '{user.Name}', is_authorisation = '{user.IsAuthorisation}', second_name = '{user.SecondName}', email = '{user.Email}', password = '{user.Password}', session = '{user.Session}' WHERE user_id = '{user.UserId}'";
+                    // command.ExecuteNonQuery();
+                    //
                 }
             }
         }
@@ -47,7 +49,6 @@ namespace NewGame4.Users
             {
                 var user = new UserUnitModel()
                 {
-                    Id = userReader.GetString("id"),
                     UserId = userReader.GetString("user_id"),
                     Name = userReader.GetString("name"),
                     SecondName = userReader.GetString("second_name"),
