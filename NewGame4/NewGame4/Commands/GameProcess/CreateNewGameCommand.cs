@@ -7,10 +7,11 @@ namespace NewGame4.Commands.GameProcess
 {
     public class CreateNewGameCommand : ExecuteCommand
     {
+        private string _countOfPlayers { get; }
         public CreateNewGameCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             NameCommand = nameof(CreateNewGameCommand);
-            
+            _countOfPlayers = data["countOfPlayers"];
         }      
         public override void Execute(ServerContext context)
         {
