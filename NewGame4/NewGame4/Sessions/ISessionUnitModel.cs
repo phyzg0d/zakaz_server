@@ -1,13 +1,12 @@
-﻿namespace NewGame4.Sessions
+﻿using System.Collections.Generic;
+
+namespace NewGame4.Sessions
 {
     public interface ISessionUnitModel
     {
-        string id { get;  }
-        string name { get; }
-        string second_name { get; }
-        string email { get; }
-        string password { get; }
-        string session { get; }
-        bool is_new { get; set; }
+         string Id { get; set; }
+         string[] Keys { get; set; }
+         string UserIdOwner { get; set;}
+         Dictionary<string, CameraData> Cameras { get; }
     }
 }

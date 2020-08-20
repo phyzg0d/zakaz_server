@@ -26,7 +26,7 @@ namespace NewGame4.Sessions
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(4000);
+            aTimer = new Timer(12000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;

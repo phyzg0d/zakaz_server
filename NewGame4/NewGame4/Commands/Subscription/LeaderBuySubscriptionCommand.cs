@@ -10,8 +10,6 @@ namespace NewGame4.Commands.Subscription
 {
     public class LeaderBuySubscriptionCommand : ExecuteCommand
     {
-        private bool _authorisation;
-        
         private string _password { get; }
         private string _email { get; }
         private string _allTariffs { get; }
@@ -35,15 +33,7 @@ namespace NewGame4.Commands.Subscription
         }      
         
         public override void Execute(ServerContext context)
-        {                
-            Response.StatusCode = 200;
-            if (_authorisation)
-            {
-            }
-            else
-            {
-                UserParams["Error"] = "Authorisation Error";
-            }
+        {
             Send();
         }
     }

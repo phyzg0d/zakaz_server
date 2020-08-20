@@ -29,9 +29,8 @@ namespace NewGame4.Users
                 }
                 else
                 {
-                    // command.CommandText = $"UPDATE users SET name = '{user.Name}', is_authorisation = '{user.IsAuthorisation}', second_name = '{user.SecondName}', email = '{user.Email}', password = '{user.Password}', session = '{user.Session}' WHERE user_id = '{user.UserId}'";
-                    // command.ExecuteNonQuery();
-                    //
+                    command.CommandText = $"UPDATE users SET session = '{user.Session}' WHERE user_id = '{user.UserId}'";
+                    command.ExecuteNonQuery();
                 }
             }
         }

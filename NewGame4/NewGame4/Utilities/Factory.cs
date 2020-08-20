@@ -38,7 +38,9 @@ namespace NewGame4.Utilities
                 {nameof(UserConnectionCommand), (form, response, request) => new UserConnectionCommand(form, response, request)},
                 {nameof(GetPricingCommand), (form, response, request) => new GetPricingCommand(form, response, request)},
                 {nameof(SendUserVideoCommand), (form, response, request) => new SendUserVideoCommand(form, response, request)},
-                {nameof(ScreenChangedCommand), (form, response, request) => new ScreenChangedCommand(form, response, request)}
+                {nameof(ScreenChangedCommand), (form, response, request) => new ScreenChangedCommand(form, response, request)},
+                {nameof(PlayerEnterCommand), (form, response, request) => new PlayerEnterCommand(form, response, request)},
+                {nameof(IsGameCommand), (form, response, request) => new IsGameCommand(form, response, request)},
             };
         }
     }
