@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Http;
-using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
 using NewGame4.Users;
 

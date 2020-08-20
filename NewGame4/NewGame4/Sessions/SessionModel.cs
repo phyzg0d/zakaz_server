@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 
 namespace NewGame4.Sessions
 {

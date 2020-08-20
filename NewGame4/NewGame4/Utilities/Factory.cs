@@ -9,6 +9,7 @@ using NewGame4.Commands.GamingFields;
 using NewGame4.Commands.Registration;
 using NewGame4.Commands.SignIn_SignOut;
 using NewGame4.Commands.Subscription;
+using NewGame4.Commands.UtilityCommands;
 
 namespace NewGame4.Utilities
 {
@@ -35,7 +36,9 @@ namespace NewGame4.Utilities
                 {nameof(FormingCoffersCommand), (form, response, request) => new FormingCoffersCommand(form, response, request)},
                 {nameof(DecomposedElementsCommand), (form, response, request) => new DecomposedElementsCommand(form, response, request)},
                 {nameof(UserConnectionCommand), (form, response, request) => new UserConnectionCommand(form, response, request)},
-                {nameof(GetPricingCommand), (form, response, request) => new GetPricingCommand(form, response, request)}
+                {nameof(GetPricingCommand), (form, response, request) => new GetPricingCommand(form, response, request)},
+                {nameof(SendUserVideoCommand), (form, response, request) => new SendUserVideoCommand(form, response, request)},
+                {nameof(ScreenChangedCommand), (form, response, request) => new ScreenChangedCommand(form, response, request)}
             };
         }
     }

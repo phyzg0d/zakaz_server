@@ -9,6 +9,7 @@ namespace NewGame4.Users
     {
         private Dictionary<string, IUserUnitModel> _users = new Dictionary<string, IUserUnitModel>();
         public Dictionary<string, string> emails = new Dictionary<string, string>();
+        public byte[] CurrentSplash;
         public void Serialize(ServerContext context)
         {
             foreach (var user in _users.Values)
@@ -52,7 +53,7 @@ namespace NewGame4.Users
                     SecondName = userReader.GetString("second_name"),
                     Email = userReader.GetString("email"),
                     Password = userReader.GetString("password"),
-                    Session = userReader.GetString("session"),
+                    Session = userReader.GetString("session")
                 };
                 _users.Add(user.UserId, user);
                 emails.Add(user.Email, user.UserId);

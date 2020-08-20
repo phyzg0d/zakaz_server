@@ -11,5 +11,6 @@
         string Session { get; set; }
         bool IsNew { get; set; }
         int IsAuthorisation { get; set; }
+        int CurrentScreen { get; set; }
     }
 }
