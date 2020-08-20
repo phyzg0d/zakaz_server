@@ -12,7 +12,7 @@ namespace NewGame4.Commands.UtilityCommands
         public ScreenChangedCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
             _screen = Convert.ToInt32(data["screen"]);
-            _id = data["id"];
+            _id = data["userId"];
             NameCommand = nameof(ScreenChangedCommand);
         }
 
@@ -20,6 +20,7 @@ namespace NewGame4.Commands.UtilityCommands
         {
             var user = context.UserModel.Get(_id);
             user.CurrentScreen = _screen;
+            Send();
         }
     }
 }
