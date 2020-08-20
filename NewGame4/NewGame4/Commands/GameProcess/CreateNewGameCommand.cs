@@ -12,9 +12,13 @@ namespace NewGame4.Commands.GameProcess
         {
             NameCommand = nameof(CreateNewGameCommand);
             _countOfPlayers = data["countOfPlayers"];
+            
+            UserParams.Add("countOfPlayers", string.Empty);
         }      
         public override void Execute(ServerContext context)
         {
+            UserParams["error"] = false;
+            UserParams["error_text"] = "sosi";
             Console.WriteLine(UserParams.GetString("countOfPlayers"));
             Console.WriteLine(NameCommand);
             Send();
