@@ -20,13 +20,12 @@ namespace NewGame4.Users
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             _model.Serialize(_context);
-            Console.WriteLine("user_OnEndTimer");
         }
 
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(12000);
+            aTimer = new Timer(6000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;

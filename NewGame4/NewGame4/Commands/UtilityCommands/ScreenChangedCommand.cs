@@ -18,8 +18,8 @@ namespace NewGame4.Commands.UtilityCommands
 
         public override void Execute(ServerContext context)
         {
-            var user = context.UserModel.Get(_id);
-            user.CurrentScreen = _screen;
+            // var user = context.UserModel.Get(_id);
+            // user.CurrentScreen = _screen;
             Send();
         }
     }

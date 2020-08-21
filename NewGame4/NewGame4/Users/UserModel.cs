@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
@@ -29,8 +30,20 @@ namespace NewGame4.Users
                 }
                 else
                 {
-                    command.CommandText = $"UPDATE users SET session = '{user.Session}' WHERE user_id = '{user.UserId}'";
-                    command.ExecuteNonQuery();
+                    try
+                    {
+                        using (SqlCommand command1 = context.BdConnection.Connection.CreateCommand())
+                        {
+                            command1.CommandText = $"UPDATE users SET session = @session WHERE user_id = @userId";
+                            command1.Parameters.Add("@session", SqlDbType.NVarChar).Value = user.Session;
+                            command1.Parameters.Add("@userId", SqlDbType.NVarChar).Value = user.UserId;
+                            command1.ExecuteNonQuery();
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 }
             }
         }

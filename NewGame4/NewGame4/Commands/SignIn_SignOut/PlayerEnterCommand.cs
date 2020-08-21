@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using NewGame4.Commands.Base;
 
 namespace NewGame4.Commands.SignIn_SignOut
@@ -19,7 +18,7 @@ namespace NewGame4.Commands.SignIn_SignOut
             if (context.SessionModel.sessions.ContainsKey(_key))
             {
                 UserParams.Add("authorisation", true);
-                UserParams.Add("sessionId", context.SessionModel.Get(_key).Id);
+                UserParams.Add("sessionId", context.SessionModel.Get(context.SessionModel.sessions[_key]).Id);
             }
             Send();
         }

@@ -20,13 +20,12 @@ namespace NewGame4.Sessions
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             _model.Serialize(_context);
-            Console.WriteLine("session_OnEndTimer");
         }
 
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(12000);
+            aTimer = new Timer(6000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
