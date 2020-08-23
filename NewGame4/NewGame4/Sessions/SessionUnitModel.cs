@@ -20,5 +20,6 @@ namespace NewGame4.Sessions
         public byte[] Camera;
         public int X;
         public int Y;
+        public bool IsActive;
     }
 }

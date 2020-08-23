@@ -12,6 +12,7 @@ namespace NewGame4.Commands.GameProcess
         private string _sessionId { get; }
         public IsGameCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
+            NameCommand = nameof(IsGameCommand);
             _sessionId = data["sessionId"];
             _userId = data["userId"];
         }
