@@ -46,7 +46,6 @@ namespace NewGame4.Commands.GameProcess
                 };
                 session.Cameras.Add(_userId, cameraData);
             }
-            
             Send();
         }
     }

@@ -37,9 +37,9 @@ namespace NewGame4.Commands.Base
         
         protected async void Send()
         {
-            Console.WriteLine(NameCommand);
             var sendObject = JsonConvert.SerializeObject(UserParams);
             await Response.WriteAsync(sendObject);
+            await Response.CompleteAsync();
         }
         
         public abstract void Execute(ServerContext context);
