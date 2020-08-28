@@ -1,72 +1,111 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
+using static NewGame4.FileConstHelper;
 
 namespace NewGame4
 {
     public static class FileHelper
     {
-        static string directoryPath = @"NewDirectory";
-        static string filePath = @"newfile.txt";
-        static string subDirectoryPath = @"NewSubDirectory";
-        
-        public static void CreateFile()
+        public static void CreateFile(string filePath)
         {
-           
-            FileInfo newFile = new FileInfo(filePath);
-            
-            if (!newFile.Exists)
+            if (!File.Exists(filePath))
             {
-                newFile.Create();
-                Console.WriteLine($"File created {newFile.Name}");
-                Console.WriteLine($"File extension {newFile.Extension}");
-            }
-            else
-            {
-                Console.WriteLine("File exist");
+                File.Create(filePath);
             }
         }
 
-        public static void DeleteFile()
+        public static void DeleteFile(string filePath)
         {
-            FileInfo newFile = new FileInfo(filePath);
-            
-            if (newFile.Exists)
+            if (File.Exists(filePath))
             {
-                newFile.Delete();
-                Console.WriteLine("File has been removed");
-            }
-            else
-            {
-                Console.WriteLine("File not exist");
+                File.Delete(filePath);
             }
         }
 
-        public static void CreateDirectory()
+        public static void CreateDirectory(string directoryPath)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
-                directoryInfo.CreateSubdirectory(subDirectoryPath);
-                Console.WriteLine("Directory and subdirectory has been created");
-            }
-            else
-            {
-                Console.WriteLine("Directory exist");
             }
         }
-        
-        public static void DeleteDirectory()
+
+        public static void DeleteDirectory(string directoryPath)
         {
             if (Directory.Exists(directoryPath))
             {
                 Directory.Delete(directoryPath, true);
-                Console.WriteLine("Directory removed");
             }
-            else
+        }
+
+        public static void CompressFile(string filePath, string archivedFilePath)
+        {
+            if (File.Exists(filePath))
             {
-                Console.WriteLine("Removing directory error");
+                using (var sourceStream = new FileStream(filePath, FileMode.OpenOrCreate))
+                {
+                    using (var targetStream = File.Create(archivedFilePath))
+                    {
+                        using (GZipStream compressionStream = new GZipStream(targetStream, CompressionMode.Compress))
+                        {
+                            sourceStream.CopyTo(compressionStream);
+                            Console.WriteLine("File compress succesfully");
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void DecompressFile(string archivedFilePath, string unarchivedFilePath)
+        {
+            if (File.Exists(archivedFilePath))
+            {
+                using (FileStream sourceStream = new FileStream(archivedFilePath, FileMode.OpenOrCreate))
+                {
+                    using (FileStream targetStream = File.Create(unarchivedFilePath))
+                    {
+                        using (GZipStream decompressionStream =
+                            new GZipStream(sourceStream, CompressionMode.Decompress))
+                        {
+                            decompressionStream.CopyTo(targetStream);
+                            Console.WriteLine("File decompress succesfully");
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void DeleteCompressedFile(string compressedFile)
+        {
+            if (File.Exists(compressedFile))
+            {
+                File.Delete(compressedFile);
+            }
+        }
+
+        public static void CompressDirectory(string directoryPath, string archivedDirectoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                ZipFile.CreateFromDirectory(directoryPath, archivedDirectoryPath);
+            }
+        }
+
+        public static void DecompressDirectory(string archivedDirectoryPath, string unarchivedDirectoryPath)
+        {
+            if (File.Exists(archivedDirectoryPath))
+            {
+                Directory.CreateDirectory(unarchivedDirectoryPath);
+                ZipFile.ExtractToDirectory(archivedDirectoryPath, unarchivedDirectoryPath);
+            }
+        }
+
+        public static void CompressFileArray(string[] files, string zipFiles)
+        {
+            if (File.Exists(files.ToString()))
+            {
+                ZipFile.CreateFromDirectory(files.ToString(), zipFiles);
             }
         }
     }
