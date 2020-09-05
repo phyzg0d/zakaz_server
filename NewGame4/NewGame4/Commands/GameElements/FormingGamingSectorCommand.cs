@@ -21,7 +21,7 @@ namespace NewGame4.Commands.GameElements
 
         public FormingGamingSectorCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
+            NameCommand = nameof(FormingGamingSectorCommand);
             _buttons = data["buttons"];
             _name = data["name"];
             _secondName = data["secondName"];

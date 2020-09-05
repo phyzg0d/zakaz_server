@@ -17,7 +17,7 @@ namespace NewGame4.Commands.GameElements
 
         public DecomposedElementsCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
+            NameCommand = nameof(DecomposedElementsCommand);
             _buttons = data["buttons"];
             _bags = data["bags"];
             _bagNumber = data["bagNumber"];

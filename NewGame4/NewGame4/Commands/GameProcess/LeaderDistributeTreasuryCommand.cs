@@ -16,7 +16,7 @@ namespace NewGame4.Commands.GameProcess
         
         public LeaderDistributeTreasuryCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
+            NameCommand = nameof(LeaderDistributeTreasuryCommand);
             _name = data["name"];
             _secondName = data["secondName"];
             _gear = data["gear"];

@@ -8,7 +8,7 @@ namespace NewGame4.Users
     {
         private readonly ServerContext _context;
         private readonly UserModel _model;
-        private Timer aTimer;
+        private Timer _aTimer;
         
 
         public UserController(ServerContext context, UserModel model)
@@ -25,17 +25,17 @@ namespace NewGame4.Users
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(6000);
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            _aTimer = new Timer(6000);
+            _aTimer.Elapsed += OnTimedEvent;
+            _aTimer.AutoReset = true;
+            _aTimer.Enabled = true;
         }
 
         public void Deactivate()
         {
-            aTimer.Elapsed -= OnTimedEvent;
-            aTimer.Enabled = false;
-            aTimer = null;
+            _aTimer.Elapsed -= OnTimedEvent;
+            _aTimer.Enabled = false;
+            _aTimer = null;
         }
     }
 }

@@ -35,11 +35,6 @@
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>
-      <Content Update="Configs\ServerConfig.json">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
       <Content Update="Web.config">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -58,6 +53,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Configs" />
       <Folder Include="Resources\GameResources" />
       <Folder Include="Resources\LeaderGameResources" />
     </ItemGroup>

@@ -8,7 +8,7 @@ namespace NewGame4.Sessions
     {
         private readonly ServerContext _context;
         private readonly SessionModel _model;
-        private Timer aTimer;
+        private Timer _aTimer;
         
 
         public SessionController(ServerContext context, SessionModel model)
@@ -25,17 +25,17 @@ namespace NewGame4.Sessions
         public void Activate()
         {
             _model.Deserialize(_context);
-            aTimer = new Timer(6000);
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            _aTimer = new Timer(6000);
+            _aTimer.Elapsed += OnTimedEvent;
+            _aTimer.AutoReset = true;
+            _aTimer.Enabled = true;
         }
 
         public void Deactivate()
         {
-            aTimer.Elapsed -= OnTimedEvent;
-            aTimer.Enabled = false;
-            aTimer = null;
+            _aTimer.Elapsed -= OnTimedEvent;
+            _aTimer.Enabled = false;
+            _aTimer = null;
         }
     }
 }

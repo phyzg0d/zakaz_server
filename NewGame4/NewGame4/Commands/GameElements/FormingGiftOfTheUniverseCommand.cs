@@ -18,7 +18,7 @@ namespace NewGame4.Commands.GameElements
 
         public FormingGiftOfTheUniverseCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
+            NameCommand = nameof(FormingGiftOfTheUniverseCommand);
             _buttons = data["buttons"];
             _bags = data["bags"];
             _bagNumber = data["bagNumber"];

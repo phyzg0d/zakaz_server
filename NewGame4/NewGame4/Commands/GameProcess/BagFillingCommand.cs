@@ -17,7 +17,7 @@ namespace NewGame4.Commands.GameProcess
 
         public BagFillingCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
         {
-            NameCommand = nameof(UserSignInCommand);
+            NameCommand = nameof(BagFillingCommand);
             _name = data["name"];
             _buttons = data["buttons"];
             _cards = data["cards"];

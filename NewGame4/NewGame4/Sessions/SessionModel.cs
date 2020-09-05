@@ -6,7 +6,7 @@ namespace NewGame4.Sessions
     {
         private Dictionary<string, ISessionUnitModel> _users = new Dictionary<string, ISessionUnitModel>();
         public Dictionary<string, string> sessions = new Dictionary<string, string>();
-        
+
         public void Serialize(ServerContext context)
         {
         }

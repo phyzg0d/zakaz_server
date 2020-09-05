@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 
 namespace NewGame4.Users
 {
@@ -10,9 +9,6 @@ namespace NewGame4.Users
     {
         private Dictionary<string, IUserUnitModel> _users = new Dictionary<string, IUserUnitModel>();
         public Dictionary<string, string> emails = new Dictionary<string, string>();
-        public byte[] CurrentSplash;
-        public int X;
-        public int Y;
         public void Serialize(ServerContext context)
         {
             foreach (var user in _users.Values)
