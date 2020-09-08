@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using NewGame4.Commands;
+using NewGame4.Decks;
 using NewGame4.Sessions;
 using NewGame4.Users;
 using NewGame4.Utilities;
@@ -42,6 +43,7 @@ namespace NewGame4.Core
             _context.Factory = new Factory(_context);
             _context.UserModel = new UserModel();
             _context.SessionModel = new SessionModel();
+            _context.DeckModel = new DeckModel();
         }
 
         private void CreateControllers()
