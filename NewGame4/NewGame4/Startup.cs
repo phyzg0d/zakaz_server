@@ -23,7 +23,7 @@ namespace NewGame4
             StartController = new StartController(Context, HttpContext);
 
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            // app.UseStaticFiles();
 
             app.UseRouting();
             

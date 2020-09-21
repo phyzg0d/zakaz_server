@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 using NewGame4.Commands.Base;
+using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
 namespace NewGame4.Commands
 {
@@ -19,6 +20,10 @@ namespace NewGame4.Commands
         {
             if (context.UserModel.Contains(_id))
             {
+                var deckModel = context.DeckModel.Get();
+                var json = JsonSerializer.SerializeToString(deckModel);
+                UserParams.Add("card_output", json);
+                
                 var user = context.UserModel.Get(_id);
                 if (user.Session == _session)
                 {

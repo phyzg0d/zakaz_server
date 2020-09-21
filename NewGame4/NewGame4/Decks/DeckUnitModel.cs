@@ -4,8 +4,13 @@ namespace NewGame4.Decks
 {
     public class DeckUnitModel : IDeckUnitModel
     {
-        public string Name { get; set; }
-        public string Shirt { get; set; }
-        public IDictionary<string, object> Cards { get; set; }
+        public string DeckName { get; set; }
+        public IDictionary<string, Card> Cards { get; set; }
+
+        public DeckUnitModel(string deckName,IDictionary<string,Card> cards)
+        {
+            DeckName = deckName;
+            Cards = cards;
+        }
     }
 }

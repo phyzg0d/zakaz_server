@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using fastJSON;
 using Microsoft.AspNetCore.Http;
 using NewGame4.Commands.Base;
 using NewGame4.Decks;
 using NewGame4.Utilities;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
 using Newtonsoft.Json;
-using SixLabors.ImageSharp.Processing;
 
 namespace NewGame4.Commands.Admin
 {
@@ -26,35 +24,40 @@ namespace NewGame4.Commands.Admin
 
         public override void Execute(ServerContext context)
         {
-            var name = _cards.GetString("name");
+            var deckName = _cards.GetString("name");
             var shirt = _cards.GetString("shirt");
             var cards = _cards.GetNode("cards");
-
             
-            FileHelper.CreateDirectory($"{name}"); 
+            
+            FileHelper.CreateDirectory($"{deckName}"); 
             FileHelper.CreateDirectory("Resources/Decks");
+
+            var deck = new DeckUnitModel(deckName, new Dictionary<string, Card>());
 
             foreach (var card in cards)
             {
-                Console.WriteLine(card.Key);
+                var command = new SqlCommand("")
+                {
+                    Connection = context.BdConnection.Connection
+                };
                 
-                var writePath = $"{name}/{card.Key}.jpeg";
-
-                using (StreamWriter sw = new StreamWriter($"Resources/Decks/{name}.json", false, System.Text.Encoding.Default))
+                command.CommandText = $"INSERT INTO cards(card_name, shirt, card_image, deck) VALUES('{card.Key}', '{shirt}', '{ card.Value}', '{deckName}')";
+                command.ExecuteNonQuery();
+                
+                // command.CommandText = $"UPDATE cards SET card_name = @card_name, shirt = @shirt, card_image = @card_image, deck = @deck";
+                // command.Parameters.Add("@card_name", SqlDbType.Text).Value = card.Key;
+                // command.Parameters.Add("@shirt", SqlDbType.Text).Value = shirt;
+                // command.Parameters.Add("@card_image", SqlDbType.Text).Value = card.Value;
+                // command.Parameters.Add("@deck", SqlDbType.NVarChar).Value = cards.ToString();
+                    
+                using (StreamWriter sw = new StreamWriter($"Resources/Decks/{deckName}.json", false, System.Text.Encoding.Default))
                 {
                     string json = JsonConvert.SerializeObject(_cards, Formatting.Indented);
                     sw.WriteLine(json);
                 }
 
-                Image<Rgba32> image = Image.Load(Convert.FromBase64String(card.Value.ToString()!));
-                image.Mutate(x => x.Resize(new Size(1280, 960)));
-                
                 try
                 {
-                    using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
-                    {
-                            sw.WriteLine(image);
-                    }
                     UserParams.Add("image",card.Value);
                 }
                 catch (Exception e)
@@ -63,14 +66,10 @@ namespace NewGame4.Commands.Admin
                     throw;
                 }
                 
-                var deck = new DeckUnitModel()
-                {
-                    Name = name,
-                    Shirt = shirt,
-                    Cards = cards
-                };
-                context.DeckModel.Add(deck);                
+                deck.Cards.Add(new KeyValuePair<string, Card>(card.Key,new Card(card.Key,deckName,card.Value.ToString(),shirt)));
             }
+            
+            context.DeckModel.Add(deck);
             Send();
         }
     }

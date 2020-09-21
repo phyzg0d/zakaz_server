@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using NewGame4.Commands.Base;
 using NewGame4.Users;
+using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
 namespace NewGame4.Commands.Registration
 {
@@ -13,7 +14,8 @@ namespace NewGame4.Commands.Registration
         private string _password { get; }
         private string _email { get; }
 
-        public RegistrationCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response, request)
+        public RegistrationCommand(IFormCollection data, HttpResponse response, HttpRequest request) : base(response,
+            request)
         {
             NameCommand = nameof(RegistrationCommand);
             _id = data["id"];
@@ -28,6 +30,10 @@ namespace NewGame4.Commands.Registration
 
         public override void Execute(ServerContext context)
         {
+            var deckModel = context.DeckModel.Get();
+            var json = JsonSerializer.SerializeToString(deckModel);
+            UserParams.Add("card_output", json);
+            
             if (context.UserModel.emails.ContainsKey(_email))
             {
                 UserParams["error"] = true;
@@ -51,7 +57,6 @@ namespace NewGame4.Commands.Registration
                 };
                 context.UserModel.Add(_email, user);
             }
-            
             Send();
         }
     }

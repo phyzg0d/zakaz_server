@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
-using MySql.Data.MySqlClient;
 using NewGame4.Commands.Base;
-using NewGame4.Users;
+using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
 namespace NewGame4.Commands.SignIn_SignOut
 {
@@ -31,6 +30,10 @@ namespace NewGame4.Commands.SignIn_SignOut
             }
             else
             {
+                var deckModel = context.DeckModel.Get();
+                var json = JsonSerializer.SerializeToString(deckModel);
+                UserParams.Add("card_output", json);
+                
                 var userId = context.UserModel.emails[_email];
                 var user = context.UserModel.Get(userId);
                 

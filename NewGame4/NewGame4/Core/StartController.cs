@@ -50,6 +50,7 @@ namespace NewGame4.Core
         {
             _controllerCollection.Add(new CommandController(_context, _context.CommandModel));
             _controllerCollection.Add(new UserController(_context, _context.UserModel));
+            _controllerCollection.Add(new DeckController(_context, _context.DeckModel));
             _controllerCollection.Add(new SessionController(_context, _context.SessionModel));
             _controllerCollection.Add(new DataObserver(_context, _context.UserModel));
         }
