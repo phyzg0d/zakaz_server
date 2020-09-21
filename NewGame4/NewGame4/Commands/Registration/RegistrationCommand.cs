@@ -30,10 +30,6 @@ namespace NewGame4.Commands.Registration
 
         public override void Execute(ServerContext context)
         {
-            var deckModel = context.DeckModel.Get();
-            var json = JsonSerializer.SerializeToString(deckModel);
-            UserParams.Add("card_output", json);
-            
             if (context.UserModel.emails.ContainsKey(_email))
             {
                 UserParams["error"] = true;

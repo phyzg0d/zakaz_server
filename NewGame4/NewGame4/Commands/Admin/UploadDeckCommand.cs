@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
 using fastJSON;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +7,9 @@ using NewGame4.Commands.Base;
 using NewGame4.Decks;
 using NewGame4.Utilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using JsonSerializer = Json.Net.JsonSerializer;
 
 namespace NewGame4.Commands.Admin
 {
@@ -27,49 +29,55 @@ namespace NewGame4.Commands.Admin
             var deckName = _cards.GetString("name");
             var shirt = _cards.GetString("shirt");
             var cards = _cards.GetNode("cards");
-            
-            
-            FileHelper.CreateDirectory($"{deckName}"); 
+
+            FileHelper.CreateDirectory($"{deckName}");
             FileHelper.CreateDirectory("Resources/Decks");
 
             var deck = new DeckUnitModel(deckName, new Dictionary<string, Card>());
 
             foreach (var card in cards)
             {
-                var command = new SqlCommand("")
+                using (StreamWriter sw = new StreamWriter($"Resources/Decks/{deckName}.json", false,
+                    System.Text.Encoding.Default))
                 {
-                    Connection = context.BdConnection.Connection
-                };
-                
-                command.CommandText = $"INSERT INTO cards(card_name, shirt, card_image, deck) VALUES('{card.Key}', '{shirt}', '{ card.Value}', '{deckName}')";
-                command.ExecuteNonQuery();
-                
-                // command.CommandText = $"UPDATE cards SET card_name = @card_name, shirt = @shirt, card_image = @card_image, deck = @deck";
-                // command.Parameters.Add("@card_name", SqlDbType.Text).Value = card.Key;
-                // command.Parameters.Add("@shirt", SqlDbType.Text).Value = shirt;
-                // command.Parameters.Add("@card_image", SqlDbType.Text).Value = card.Value;
-                // command.Parameters.Add("@deck", SqlDbType.NVarChar).Value = cards.ToString();
-                    
-                using (StreamWriter sw = new StreamWriter($"Resources/Decks/{deckName}.json", false, System.Text.Encoding.Default))
-                {
-                    string json = JsonConvert.SerializeObject(_cards, Formatting.Indented);
-                    sw.WriteLine(json);
+                    string jsonToFile = JsonConvert.SerializeObject(_cards, Formatting.Indented);
+                    sw.WriteLine(jsonToFile);
                 }
 
-                try
+                UserParams.Add("image", card.Value);
+                deck.Cards.Add(new KeyValuePair<string, Card>(card.Key,
+                    new Card(card.Key, deckName, card.Value.ToString(), shirt)));
+
+                context.DeckModel.Add(deck);
+
+                const string readPath = "Resources/Decks/GameRulesDecks.json";
+
+                using (StreamReader streamReader = new StreamReader(readPath))
                 {
-                    UserParams.Add("image",card.Value);
+                    string jsonString = streamReader.ReadToEnd();
+                    var buffer = (Dictionary<string, object>) JSON.Parse(jsonString);
+                    var neededDecks = buffer.GetStingArray("name");
+
+                    foreach (var nameDeck in neededDecks)
+                    {
+                        if (neededDecks.Contains(deckName))
+                        {
+                            var neededDeck = context.DeckModel.Get(nameDeck);
+                            if (neededDeck.DeckName == deckName)
+                            {
+                                Dictionary<string, string> neededCard = new Dictionary<string, string>()
+                                {
+                                    {$"{neededDeck.DeckName}", $"{card}"}
+                                };
+
+                                var json = JsonConvert.SerializeObject(neededCard, Formatting.Indented);
+                                UserParams.Add("requestCards", json);
+                            }    
+                        }
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                
-                deck.Cards.Add(new KeyValuePair<string, Card>(card.Key,new Card(card.Key,deckName,card.Value.ToString(),shirt)));
             }
-            
-            context.DeckModel.Add(deck);
+
             Send();
         }
     }

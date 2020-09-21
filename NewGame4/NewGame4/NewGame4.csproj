@@ -57,7 +57,6 @@
 
     <ItemGroup>
       <Folder Include="Configs" />
-      <Folder Include="Resources\Decks" />
       <Folder Include="Resources\GameResources" />
       <Folder Include="Resources\LeaderGameResources" />
     </ItemGroup>

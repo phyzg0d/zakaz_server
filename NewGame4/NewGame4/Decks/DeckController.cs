@@ -19,12 +19,10 @@ namespace NewGame4.Decks
 
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            _model.Serialize(_context);
         }
 
         public void Activate()
         {
-            _model.Deserialize(_context);
             _aTimer = new Timer(6000);
             _aTimer.Elapsed += OnTimedEvent;
             _aTimer.AutoReset = true;
